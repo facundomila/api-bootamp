@@ -1,6 +1,6 @@
 var React = require('react');
 var $ = require('jquery');
-var RealmStatusApi = require('../request/request');
+var RealmApi = require('../request/request');
 var Button = require('../components/button');
 var Table = require('../components/table');
 var Input = require('../components/input');
@@ -15,19 +15,29 @@ var CharacterView = React.createClass({
 
     render: function() {
         return (
-            <div>
-                <Button {...this.getButtonPropsCharacter()}>Character</Button>
-                <Input label="Name " onChange={this.handleInputChange.bind(this, 'name')} />
-                <Input label="Realm " onChange={this.handleInputChange.bind(this, 'realm')} />
-                {this.renderCharacterImage()}
-                <List items={this.getCharacterAttributes()}></List>
+            <div className="row">
+                <div className="col-md-8">
+                    <div className="FormCharacter">
+                        <div>
+                            <h3>Input name and realm</h3>
+                            <Input label="Name " onChange={this.handleInputChange.bind(this, 'name')} />
+                            <Input label="Realm " onChange={this.handleInputChange.bind(this, 'realm')} />
+                            <Button {...this.getButtonPropsCharacter()}>Character</Button>
+                        </div>
+                    </div>
+                    <div className="CharacterList">
+                        {this.renderCharacterImage()}
+                        <List items={this.getCharacterAttributes()}></List>
+
+                    </div>
+                </div>
             </div>
         );
     },
 
     renderCharacterImage: function() {
         return (this.state.character.thumbnail) ?
-            <img src={'http://us.battle.net/static-render/us/' + this.state.character.thumbnail} alt="" /> :
+            <img className="img-circle" src={'http://us.battle.net/static-render/us/' + this.state.character.thumbnail} alt="" /> :
             null;
     },
 
@@ -41,13 +51,14 @@ var CharacterView = React.createClass({
 
     getButtonPropsCharacter: function () {
         return {
-            className: 'btn-btn-primary',
+            className: 'btn btn-danger btn-lg btn-block',
             onClick: this.handleRequestCharacter
         }
     },
 
     handleRequestCharacter: function () {
-        RealmStatusApi.getCharacterProfile(this.requestCharacter, this.state.realm, this.state.name);
+        RealmApi.getCharacterProfile(this.requestCharacter, this.state.realm, this.state.name);
+
     },
 
     getCharacterAttributes: function () {

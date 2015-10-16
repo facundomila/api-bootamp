@@ -11,7 +11,9 @@ var MainView = React.createClass({
         return (
             <div {...this.getProps()}>
                 <div className="row">
-                    <HeaderView />
+                    <div className="col-md-8">
+                        <HeaderView />
+                    </div>
                 </div>
             </div>
         )

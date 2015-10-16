@@ -4,7 +4,7 @@ var _ = require ('lodash');
 var Table = React.createClass ({
 
     propTypes: {
-        colums: React.PropTypes.array,
+        colunms: React.PropTypes.array,
         rows: React.PropTypes.array
     },
 
@@ -17,9 +17,9 @@ var Table = React.createClass ({
 
     render: function () {
         return (
-            <table className="table">
+            <table className="table table-bordered">
                 <thead>
-                    <tr>
+                    <tr className="success">
                         {this.props.columns.map(this.renderColumn)}
                     </tr>
                 </thead>
@@ -38,7 +38,7 @@ var Table = React.createClass ({
 
     renderRow: function (row, index) {
         return (
-            <tr key={index}>{this.props.columns.map(this.renderCell.bind(this, row))}</tr>
+            <tr  className="warning" key={index}>{this.props.columns.map(this.renderCell.bind(this, row))}</tr>
         );
     },
 
